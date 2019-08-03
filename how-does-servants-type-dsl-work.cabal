@@ -1,0 +1,13 @@
+cabal-version:       2.4
+name:                how-does-servants-type-dsl-work
+version:             0.1.0.0
+license:             BSD-3-Clause
+license-file:        LICENSE
+author:              Brad Parker
+maintainer:          hi@bradparker.com
+
+executable server
+  main-is:             Main.hs
+  build-depends:       base ^>=4.12.0.0
+  hs-source-dirs:      src
+  default-language:    Haskell2010
