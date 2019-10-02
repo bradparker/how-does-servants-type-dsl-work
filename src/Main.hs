@@ -13,11 +13,12 @@ import GHC.Generics (Generic)
 import Network.Wai (Application)
 import Network.Wai.Handler.Warp (run)
 import Servant
-  ( (:<|>)
+  ( (:<|>)((:<|>))
   , (:>)
   , Capture
   , Get
   , JSON
+  , Server
   , serve
   )
 
@@ -42,8 +43,11 @@ type UsersAPI =
   "users"
     :> (UsersIndex :<|> UsersShow)
 
+usersServer :: Server UsersAPI
+usersServer = _usersIndex :<|> _usersShow
+
 usersApp :: Application
-usersApp = serve (Proxy @UsersAPI) _usersServer
+usersApp = serve (Proxy @UsersAPI) usersServer
 
 main :: IO ()
 main = run 8080 usersApp
