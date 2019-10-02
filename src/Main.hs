@@ -7,6 +7,7 @@
 module Main where
 
 import Data.Aeson (ToJSON)
+import Data.Foldable (find)
 import Data.Proxy (Proxy(Proxy))
 import Data.Time (Day, fromGregorian)
 import GHC.Generics (Generic)
@@ -65,8 +66,14 @@ users =
 usersIndex :: Handler [User]
 usersIndex = pure users
 
+matchesUsername :: String -> User -> Bool
+matchesUsername uname = (uname ==) . username
+
 usersShow :: String -> Handler User
-usersShow _uname = _
+usersShow uname =
+  case find (matchesUsername uname) users of
+    Nothing   -> _
+    Just user -> pure user
 
 usersServer :: Server UsersAPI
 usersServer = usersIndex :<|> usersShow
