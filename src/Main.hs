@@ -1,9 +1,12 @@
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE TypeOperators #-}
 {-# OPTIONS_GHC -Wall #-}
 
 module Main where
 
+import Data.Time (Day)
+import GHC.Generics (Generic)
 import Servant
   ( (:<|>)
   , (:>)
@@ -13,6 +16,12 @@ import Servant
   )
 
 data User = User
+  { name :: String
+  , age :: Int
+  , email :: String
+  , username :: String
+  , registrationDate :: Day
+  } deriving (Generic)
 
 type UsersIndex =
   Get '[JSON] [User]
