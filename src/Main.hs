@@ -17,6 +17,7 @@ import Servant
   , (:>)
   , Capture
   , Get
+  , Handler
   , JSON
   , Server
   , serve
@@ -43,8 +44,14 @@ type UsersAPI =
   "users"
     :> (UsersIndex :<|> UsersShow)
 
+usersIndex :: Handler [User]
+usersIndex = _
+
+usersShow :: String -> Handler User
+usersShow _uname = _
+
 usersServer :: Server UsersAPI
-usersServer = _usersIndex :<|> _usersShow
+usersServer = usersIndex :<|> usersShow
 
 usersApp :: Application
 usersApp = serve (Proxy @UsersAPI) usersServer
