@@ -6,6 +6,7 @@
 
 module Main where
 
+import Data.Aeson (ToJSON)
 import Data.Proxy (Proxy(Proxy))
 import Data.Time (Day)
 import GHC.Generics (Generic)
@@ -27,6 +28,8 @@ data User = User
   , username :: String
   , registrationDate :: Day
   } deriving (Generic)
+
+instance ToJSON User
 
 type UsersIndex =
   Get '[JSON] [User]

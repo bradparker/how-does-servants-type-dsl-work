@@ -9,6 +9,7 @@ maintainer:          hi@bradparker.com
 executable server
   main-is:             Main.hs
   build-depends:       base ^>=4.12.0.0
+                     , aeson
                      , servant-server
                      , time
                      , wai
