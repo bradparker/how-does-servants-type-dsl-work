@@ -63,7 +63,7 @@ users =
   ]
 
 usersIndex :: Handler [User]
-usersIndex = _
+usersIndex = pure users
 
 usersShow :: String -> Handler User
 usersShow _uname = _
