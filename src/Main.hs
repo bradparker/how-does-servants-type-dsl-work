@@ -6,6 +6,9 @@
 
 module Main where
 
+import Control.Monad.Error.Class
+  ( throwError
+  )
 import Data.Aeson (ToJSON)
 import Data.Foldable (find)
 import Data.Proxy (Proxy(Proxy))
@@ -21,6 +24,7 @@ import Servant
   , Handler
   , JSON
   , Server
+  , err404
   , serve
   )
 
@@ -72,7 +76,7 @@ matchesUsername uname = (uname ==) . username
 usersShow :: String -> Handler User
 usersShow uname =
   case find (matchesUsername uname) users of
-    Nothing   -> _
+    Nothing   -> throwError err404
     Just user -> pure user
 
 usersServer :: Server UsersAPI
