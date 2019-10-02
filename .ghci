@@ -1,0 +1,7 @@
+:set -fprint-explicit-foralls
+:set -XDataKinds
+:set -XNoStarIsType
+:set -XTypeApplications
+:set -XTypeOperators
+
+:load src/Main.hs
