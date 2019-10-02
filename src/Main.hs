@@ -8,7 +8,7 @@ module Main where
 
 import Data.Aeson (ToJSON)
 import Data.Proxy (Proxy(Proxy))
-import Data.Time (Day)
+import Data.Time (Day, fromGregorian)
 import GHC.Generics (Generic)
 import Network.Wai (Application)
 import Network.Wai.Handler.Warp (run)
@@ -43,6 +43,24 @@ type UsersShow =
 type UsersAPI =
   "users"
     :> (UsersIndex :<|> UsersShow)
+
+users :: [User]
+users =
+  [ User
+    { name             = "Isaac Newton"
+    , age              = 372
+    , email            = "isaac@newton.co.uk"
+    , username         = "isaac"
+    , registrationDate = fromGregorian 1683 3 1
+    }
+  , User
+    { name             = "Albert Einstein"
+    , age              = 136
+    , email            = "ae@mc2.org"
+    , username         = "albert"
+    , registrationDate = fromGregorian 1905 12 1
+    }
+  ]
 
 usersIndex :: Handler [User]
 usersIndex = _
